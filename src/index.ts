@@ -3,7 +3,7 @@ import { clients, initialClientState } from "./state";
 import type { ClientState } from "./types";
 import { broadcast } from "./utils";
 
-Bun.serve<ClientState>({
+const server = Bun.serve<ClientState>({
   fetch(request, server) {
     const upgraded = server.upgrade(request, {
       data: initialClientState(),
@@ -32,3 +32,5 @@ Bun.serve<ClientState>({
     },
   },
 });
+
+console.log(`Server running at ${server.url}`);
